@@ -5,7 +5,6 @@
 
 (package-initialize)
 
-
 (defvar my-packages '(rainbow-delimiters
                       clojure-mode
                       clojure-test-mode
@@ -14,7 +13,8 @@
                       regex-tool
                       js2-mode
                       better-defaults
-                      org))
+                      org
+                      use-package))
 
 ; fetch the list of packages available 
 (unless package-archive-contents
