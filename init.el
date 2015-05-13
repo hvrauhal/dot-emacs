@@ -18,7 +18,9 @@
                       js2-mode
                       better-defaults
                       org
-                      use-package))
+                      use-package
+                      hipster-theme
+                      leuven-theme))
 
 ; fetch the list of packages available 
 (unless package-archive-contents
