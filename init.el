@@ -82,13 +82,6 @@
 (set-face-attribute 'default nil
                     :family "Source Code Pro" :height 130 :weight 'normal)
 
-
-(defadvice hl-line-mode (after
-                         dino-advise-hl-line-mode
-                         activate compile)
-  (set-face-background 'hl-line "#f8f8f8"))
-;(global-hl-line-mode)
-
 (defun my-js2-mode-toggle-strict-missing-semi-warning ()
   (interactive)
   (setq js2-strict-missing-semi-warning (eq js2-strict-missing-semi-warning nil))
