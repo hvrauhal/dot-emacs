@@ -77,9 +77,11 @@
 (if window-system
   (progn
     (set-exec-path-from-shell-PATH)
-    (load-theme 'leuven t))
+    (load-theme 'leuven t)
+    (menu-bar-mode 1))
   (progn
     (load-theme 'hipster t)))
+
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
