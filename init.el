@@ -22,6 +22,11 @@
                       hipster-theme
                       leuven-theme))
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook 'ac-js2-mode)
+
+
+
 ; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -43,6 +48,8 @@
  '(current-language-environment "UTF-8")
  '(indent-tabs-mode nil nil nil "Use spaces only.")
  '(initial-scratch-message nil)
+ '(js2-basic-offset 2)
+ '(js2-strict-missing-semi-warning nil)
  '(nxml-child-indent 2)
  '(nxml-outline-child-indent 2)
  '(org-agenda-files (quote ("~/y/diary.org")))
@@ -80,7 +87,8 @@
     (load-theme 'leuven t)
     (menu-bar-mode 1))
   (progn
-    (load-theme 'hipster t)))
+    (load-theme 'hipster t)
+    (global-set-key (kbd "TAB") 'hippie-expand)))
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -117,3 +125,4 @@
   ;; Replace "sbcl" with the path to your implementation
   (setq inferior-lisp-program "sbcl")
 
+(remove-hook 'git-commit-mode-hook #'turn-on-auto-fill)
