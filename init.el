@@ -20,7 +20,8 @@
                       org
                       use-package
                       hipster-theme
-                      leuven-theme))
+                      leuven-theme
+                      editorconfig))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook 'ac-js2-mode)
@@ -126,3 +127,5 @@
   (setq inferior-lisp-program "sbcl")
 
 (remove-hook 'git-commit-mode-hook #'turn-on-auto-fill)
+
+(put 'downcase-region 'disabled nil)
