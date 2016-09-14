@@ -127,5 +127,15 @@
   (setq inferior-lisp-program "sbcl")
 
 (remove-hook 'git-commit-mode-hook #'turn-on-auto-fill)
-
 (put 'downcase-region 'disabled nil)
+
+(setq visible-bell nil)
+(setq ring-bell-function (lambda ()
+                           (invert-face 'mode-line)
+                           (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+
+(setq ediff-split-window-function 'split-window-sensibly)
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+(setq pop-up-windows nil)
+
