@@ -88,8 +88,7 @@
     (load-theme 'leuven t)
     (menu-bar-mode 1))
   (progn
-    (load-theme 'hipster t)
-    (global-set-key (kbd "TAB") 'hippie-expand)))
+    (load-theme 'hipster t)))
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -139,3 +138,4 @@
 
 (setq pop-up-windows nil)
 
+(server-start)
