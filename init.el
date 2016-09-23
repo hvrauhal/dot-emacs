@@ -57,7 +57,9 @@
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
- '(whitespace-style (quote (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
+ '(whitespace-style
+   (quote
+    (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 
 
 (when (fboundp 'tool-bar-mode)
@@ -125,7 +127,6 @@
   ;; Replace "sbcl" with the path to your implementation
   (setq inferior-lisp-program "sbcl")
 
-(remove-hook 'git-commit-mode-hook #'turn-on-auto-fill)
 (put 'downcase-region 'disabled nil)
 
 (setq visible-bell nil)
@@ -139,3 +140,5 @@
 (setq pop-up-windows nil)
 
 (server-start)
+
+(global-git-commit-mode)
