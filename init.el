@@ -145,3 +145,7 @@
 (server-start)
 
 (global-git-commit-mode)
+
+; Apologize for the lack of path_helper support by just adding the contents of /etc/paths.d/TeX manually
+(setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
+(setq exec-path (append exec-path '("/Library/TeX/texbin")))
