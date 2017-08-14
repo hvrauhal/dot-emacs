@@ -3,9 +3,8 @@
   (message "Loading %s..." load-file-name))
 
 (require 'package)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+(customize-set-variable 'package-archives '(("melpa" . "https://melpa.milkbox.net/packages/")
+                                            ("gnu"   . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 (setq package-initialize-at-startup nil) ; don't do it again
@@ -50,6 +49,7 @@
  ;; If there is more than one, they won't work right.
  '(css-indent-offset 2)
  '(current-language-environment "UTF-8")
+ '(git-commit-summary-max-length 130)
  '(indent-tabs-mode nil nil nil "Use spaces only.")
  '(initial-scratch-message nil)
  '(js2-basic-offset 2)
@@ -57,6 +57,13 @@
  '(nxml-child-indent 2)
  '(nxml-outline-child-indent 2)
  '(org-agenda-files (quote ("~/y/diary.org")))
+ '(package-archives
+   (quote
+    (("melpa" . "https://melpa.milkbox.net/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -64,6 +71,8 @@
    (quote
     (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark newline-mark))))
 
+(require 're-builder)
+(setq reb-re-syntax 'string)
 
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
