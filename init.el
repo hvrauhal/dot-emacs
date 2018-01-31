@@ -12,10 +12,13 @@
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
+
 (package-initialize)
 
 (setq package-initialize-at-startup nil) ; don't do it again
 
+(when (string= system-type "darwin")       
+  (setq dired-use-ls-dired nil))
 
 (defvar my-packages '(rainbow-delimiters
                       clojure-mode
@@ -64,7 +67,9 @@
  '(org-agenda-files (quote ("~/y/diary.org")))
  '(package-selected-packages
    (quote
-    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults)))
+
+    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
+
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -154,6 +159,14 @@
 (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
 
-(setq pico8-documentation-file "/Users/rauhahe/Downloads/PICO-8/pico8.txt")
-
 (add-hook 'after-init-hook 'global-company-mode)
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(require 'ido)
+(ido-mode t)
+
+(require 'smex) ; Not needed if you use package.el
+(smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+                                        ; when Smex is auto-initialized on its first run.
+(global-set-key (kbd "M-x") 'smex)
