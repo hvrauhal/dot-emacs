@@ -57,13 +57,9 @@
  '(nxml-child-indent 2)
  '(nxml-outline-child-indent 2)
  '(org-agenda-files (quote ("~/y/diary.org")))
- '(package-archives
-   (quote
-    (("melpa" . "https://melpa.milkbox.net/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
+    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig clojure-test-mode better-defaults)))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -158,3 +154,6 @@
 ; Apologize for the lack of path_helper support by just adding the contents of /etc/paths.d/TeX manually
 (setenv "PATH" (concat (getenv "PATH") ":/Library/TeX/texbin"))
 (setq exec-path (append exec-path '("/Library/TeX/texbin")))
+
+(setq pico8-documentation-file "/Users/rauhahe/Downloads/PICO-8/pico8.txt")
+
