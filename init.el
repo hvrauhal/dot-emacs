@@ -3,16 +3,22 @@
   (message "Loading %s..." load-file-name))
 
 (require 'package)
-(customize-set-variable 'package-archives '(("melpa" . "https://melpa.milkbox.net/packages/")
-                                            ("gnu"   . "https://elpa.gnu.org/packages/")))
-
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (when (< emacs-major-version 24)
+    ;; For important compatibility libraries like cl-lib
+    (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
+
 (setq package-initialize-at-startup nil) ; don't do it again
 
 
 (defvar my-packages '(rainbow-delimiters
                       clojure-mode
-                      clojure-test-mode
                       markdown-mode
                       cider
                       regex-tool
@@ -20,7 +26,6 @@
                       better-defaults
                       org
                       use-package
-                      hipster-theme
                       leuven-theme
                       editorconfig
                       magit))
@@ -59,7 +64,7 @@
  '(org-agenda-files (quote ("~/y/diary.org")))
  '(package-selected-packages
    (quote
-    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig clojure-test-mode better-defaults)))
+    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults)))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -92,13 +97,7 @@
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
 
-(if window-system
-  (progn
-    (set-exec-path-from-shell-PATH)
-    (load-theme 'leuven t)
-    (menu-bar-mode 1))
-  (progn
-    (load-theme 'hipster t)))
+(load-theme 'leuven t)
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
@@ -157,3 +156,4 @@
 
 (setq pico8-documentation-file "/Users/rauhahe/Downloads/PICO-8/pico8.txt")
 
+(add-hook 'after-init-hook 'global-company-mode)
