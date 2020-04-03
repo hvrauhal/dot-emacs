@@ -1,6 +1,7 @@
 (defconst emacs-start-time (current-time))
 (unless noninteractive
   (message "Loading %s..." load-file-name))
+(global-auto-revert-mode)
 
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -67,7 +68,7 @@
  '(org-agenda-files (quote ("~/y/diary.org")))
  '(package-selected-packages
    (quote
-    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 company flycheck smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
+    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 company flycheck smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 groovy-mode elpy flycheck-pycheckers pipenv docker dockerfile-mode flx-ido ag projectile paredit slime js2-mode ssh-config-mode company-qml qml-mode company flycheck smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -87,6 +88,9 @@
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile" . ruby-mode))
 (add-to-list 'interpreter-mode-alist '("ruby" . ruby-mode))
+
+(setq python-shell-interpreter "/usr/local/bin/python3")
+
 
 (global-set-key (kbd "M-S-SPC") 'hippie-expand)
 (setq mac-option-key-is-meta nil)
@@ -119,7 +123,6 @@
 
 
 ; (delete-selection-mode 1)
-(set-default-font "Source Code Pro 13")
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -133,9 +136,9 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
- (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  ;; Replace "sbcl" with the path to your implementation
-  (setq inferior-lisp-program "sbcl")
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "sbcl")
 
 (put 'downcase-region 'disabled nil)
 
@@ -170,3 +173,20 @@
 (global-set-key (kbd "M-x") 'smex)
 
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-dabbrev-downcase nil)
+
+(size-indication-mode)
+
+;; Lessen the insane escaping in re-builder
+(setq reb-re-syntax 'string)
+(when (eq window-system 'mac)
+  (set-face-attribute 'default nil :family "Hasklig")
+  (set-face-attribute 'default nil :height 130)
+  (mac-auto-operator-composition-mode))
+
+
+(add-hook 'sh-mode-hook 'flycheck-mode)
+(add-hook 'json-mode-hook 'flycheck-mode)
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
