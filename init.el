@@ -1,6 +1,7 @@
 (defconst emacs-start-time (current-time))
 (unless noninteractive
   (message "Loading %s..." load-file-name))
+
 (global-auto-revert-mode)
 
 (require 'package)
@@ -9,7 +10,7 @@
        (proto (if no-ssl "http" "https")))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives '("gnu" . (concat proto "://elpa.gnu.org/packages/")))))
@@ -32,6 +33,9 @@
                       use-package
                       leuven-theme
                       editorconfig
+		      projectile
+                      company
+                      smex
                       magit))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -68,7 +72,7 @@
  '(org-agenda-files (quote ("~/y/diary.org")))
  '(package-selected-packages
    (quote
-    (mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode better-defaults ac-js2 company-lua company lua-mode use-package sass-mode regex-tool rainbow-delimiters org markdown-mode magit macrostep leuven-theme js2-mode hipster-theme editorconfig better-defaults smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 company flycheck smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2 groovy-mode elpy flycheck-pycheckers pipenv docker dockerfile-mode flx-ido ag projectile paredit slime js2-mode ssh-config-mode company-qml qml-mode company flycheck smex lua-mode markdown-preview-mode mediawiki yaml-mode use-package sql-indent sass-mode regex-tool rainbow-delimiters php-mode org monokai-theme markdown-mode magit leuven-theme less-css-mode latex-preview-pane latex-extra json-mode inf-mongo hipster-theme gist editorconfig dash-at-point color-theme-monokai coffee-mode clojure-test-mode better-defaults ac-js2)))
+    (gnu-elpa-keyring-update ac-js2 ag better-defaults clojure-test-mode coffee-mode color-theme-monokai company company-lua company-qml dash-at-point docker dockerfile-mode editorconfig elpy flx-ido flycheck flycheck-pycheckers gist groovy-mode hipster-theme inf-mongo js2-mode json-mode latex-extra latex-preview-pane less-css-mode leuven-theme lua-mode macrostep magit markdown-mode markdown-preview-mode mediawiki monokai-theme org paredit php-mode pipenv projectile qml-mode rainbow-delimiters regex-tool sass-mode slime smex sql-indent ssh-config-mode use-package yaml-mode)))
  '(sgml-basic-offset 4)
  '(show-paren-mode t)
  '(transient-mark-mode (quote identity))
@@ -149,8 +153,6 @@
 
 (setq ediff-split-window-function 'split-window-sensibly)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-(setq pop-up-windows nil)
 
 (server-start)
 
